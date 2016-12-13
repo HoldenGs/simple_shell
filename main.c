@@ -10,23 +10,25 @@
 int main(int ac, char **av, char **env)
 {
 	char *line, *word;
+	int i;
 	ssize_t n;
-	listnode_t *head;
+	char *holder[1024];
 
 	n = 1024;
-	head = NULL;
 	line = malloc(sizeof(char) * n);
 	while (n)
 	{
 		printf("$ ");
 		n = getline(&line, &n, stdin);
+		i = 0;
 		while ((word = strtok(line, " ")) != NULL)
 		{
-			if (line == NULL)
-				putchar(' ');
-			printf("%s", word);
+			holder[i] = word;
 			line = NULL;
+			i++;
 		}
+		if (*holder[0] != '\n')
+			print_array(holder, i);
 	}
 	free(line);
 	return (0);
