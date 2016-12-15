@@ -1,5 +1,6 @@
 #ifndef SHELL_H
 #define SHELL_H
+#define BUFSIZE 1024
 
 /* --Linked List Structure-- */
 /**
@@ -20,13 +21,21 @@ typedef struct listnode_s
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <fcntl.h>
 #include <unistd.h>
-
-/* --Vanilla Functions-- */
-int main(int ac, char **av, char **env);
+#include <string.h>
 
 /* --Custom Functions--*/
-void print_array(char **a, int n);
+void loop(void);
+char *read_line(void);
+char **parse(char *line);
+int execute(char **args);
+int launch(char **args);
+int cd_func(char **args);
+int help_func(char **args);
+int exit_func(char **args);
+int builtin_count(void);
+int _strcmp(char *s1, char *s2);
 
 #endif /* End SHELL_H */
