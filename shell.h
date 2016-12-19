@@ -25,6 +25,7 @@ typedef struct addresses
 /* --Functions-- */
 void loop(void);
 char **make_args(char *input);
+char *tokenize(char *input, const char *delim, char **saveptr);
 void output(char **args);
 void execute(char **args);
 void *smart_alloc(size_t size);
@@ -33,5 +34,7 @@ int _putchar(char c);
 int wordcount(char *str);
 char *_strdup(char *str);
 int _strlen(char *s);
+char *_strpbrk(char *s, const char *accept);
+int _strspn(char *s, const char *accept);
 
 #endif /* SHELL_H */

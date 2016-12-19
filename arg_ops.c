@@ -17,11 +17,11 @@ char **make_args(char *input)
 	i = 0;
 	wc = wordcount(input);
 	args = smart_alloc(sizeof(char *) * (wc + 1));
-	arg = strtok_r(input, delims, &pos);
+	arg = tokenize(input, delims, &pos);
 	while (arg != NULL)
 	{
 		args[i] = arg;
-		arg = strtok_r(NULL, delims, &pos);
+		arg = tokenize(NULL, delims, &pos);
 		i++;
 	}
 	args[i] = NULL;
