@@ -13,6 +13,9 @@ void output(char **args)
 
 	if (args[0][0] == '/')
 		execute(args);
+	else
+		for (i = 0; args[i] != NULL; i++)
+			printf("%s\n", args[i]);
 }
 
 /**

@@ -25,8 +25,6 @@ typedef struct addresses
 /* --Functions-- */
 void loop(void);
 char **make_args(char *input);
-char *tokenize(char *input, const char *delim, char *saveptr);
-char *make_token(char *input, const char *delims);
 void output(char **args);
 void execute(char **args);
 void *smart_alloc(size_t size);

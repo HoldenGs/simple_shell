@@ -13,17 +13,17 @@ char **make_args(char *input)
 	int i, wc;
 
 	pos = NULL;
-	delims = " \n";
+	delims = " \n\t";
 	i = 0;
 	wc = wordcount(input);
 	args = smart_alloc(sizeof(char *) * (wc + 1));
-	arg = tokenize(input, delims, pos);
+	arg = strtok_r(input, delims, &pos);
 	while (arg != NULL)
 	{
 		args[i] = arg;
-		printf("args[i] = %s\n", args[i]);
-		arg = tokenize(NULL, delims, pos);
+		arg = strtok_r(NULL, delims, &pos);
 		i++;
 	}
+	args[i] = NULL;
 	return (args);
 }
