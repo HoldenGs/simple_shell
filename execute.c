@@ -1,22 +1,35 @@
 #include "shell.h"
 
 /**
- * execute - execute a command
+ * output - decide what to do with @args
  *
- * @args:
+ * @args: array of argument strings
  *
  * Return: void
  */
-void execute(char **input)
+void output(char **args)
+{
+	int i;
+
+	if (args[0][0] == '/')
+		execute(args);
+}
+
+/**
+ * execute - execute a program
+ *
+ * @args: array of argument strings
+ *
+ * Return: void
+ */
+void execute(char **args)
 {
 	pid_t pid;
 	int status;
 
 	pid = fork();
 	if (pid == 0)
-	{
-		status = execve(input[0], input, environ);
-	}
+		status = execve(args[0], args, environ);
 	else
-		waitpid(pid, &status, 0);
+		wait(&status);
 }

@@ -1,6 +1,15 @@
 #ifndef SHELL_H
 #define SHELL_H
+#define OUT 0
+#define IN 1
 extern char **environ;
+
+/* --Address List-- */
+typedef struct addresses
+{
+	void *address;
+	struct addresses *next;
+} addr_t;
 
 /* --Library Headers-- */
 #include <stdio.h>
@@ -15,10 +24,16 @@ extern char **environ;
 
 /* --Functions-- */
 void loop(void);
-char **parse(char *input);
-char *tokenize(char *input, const char *delim, char **saveptr);
-void execute(char **input);
+char **make_args(char *input);
+char *tokenize(char *input, const char *delim, char *saveptr);
+char *make_token(char *input, const char *delims);
+void output(char **args);
+void execute(char **args);
+void *smart_alloc(size_t size);
 void _puts(char *str);
 int _putchar(char c);
+int wordcount(char *str);
+char *_strdup(char *str);
+int _strlen(char *s);
 
 #endif /* SHELL_H */

@@ -26,13 +26,18 @@ int main(int ac, char **av, char **env)
 void loop(void)
 {
 	char *input, **args;
+	int n, i;
 	size_t size;
 
+	size = 0;
+	input = NULL;
 	while (1)
 	{
-		_puts("$ ");
+		_puts("HoldenGs$ ");
 		getline(&input, &size, stdin);
-		args = parse(input);
-		execute(args);
+		args = make_args(input);
+		output(args);
 	}
+	free(args);
+	free(input);
 }
