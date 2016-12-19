@@ -1,29 +1,22 @@
 #include "shell.h"
 
 /**
- * execute the corresponding function or program
- * @args: pointer array of arguments
+ * execute - execute a command
  *
- * Return: either an executing builtin function or outside program
+ * @args:
+ *
+ * Return: void
  */
-int execute(char **args)
+void execute(char **input)
 {
-	char *builtin_str[] = {
-		"cd",
-		"help",
-		"exit"
-	};
-	int (*builtin_func[])(char **) = {
-		cd_func,
-		help_func,
-		exit_func
-	};
-	int i;
+	pid_t pid;
+	int status;
 
-	if (args[0] == NULL)
-		return (1);
-	for (i = 0; i < 3; i++)
-		if (_strcmp(args[0], builtin_str[i]) == 0)
-		    return ((*builtin_func[i])(args));
-	return (launch(args));
+	pid = fork();
+	if (pid == 0)
+	{
+		status = execve(input[0], input, environ);
+	}
+	else
+		waitpid(pid, &status, 0);
 }

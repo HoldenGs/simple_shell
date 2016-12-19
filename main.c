@@ -1,12 +1,38 @@
 #include "shell.h"
 
 /**
- * main - initialize and shutdown loop function
+ * main - initialization of shell
  *
- * Return: 0
+ * @ac: argument count
+ * @av: array of arguments
+ * @env: environment
+ *
+ * Return: 0 if success, -1 if failure
  */
-int main(void)
+int main(int ac, char **av, char **env)
 {
 	loop();
 	return (0);
+}
+
+/**
+ * loop - shell prompt loop
+ *
+ * @env: linked list of environment
+ * @fd: pointer to file descriptor
+ *
+ * Return: 0 if success, -1 if failure
+ */
+void loop(void)
+{
+	char *input, **args;
+	size_t size;
+
+	while (1)
+	{
+		_puts("$ ");
+		getline(&input, &size, stdin);
+		args = parse(input);
+		execute(args);
+	}
 }
