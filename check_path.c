@@ -13,6 +13,7 @@ char **check_path(char **args)
 {
 	char *filename, *delim, *pos, *path, *dir;
 	struct stat st;
+	int l;
 
 	pos = NULL;
 	delim = ":";
@@ -29,12 +30,10 @@ char **check_path(char **args)
 		if (stat(filename, &st) == 0)
 		{
 			args[0] = filename;
-			free(path);
 			return (args);
 		}
 		dir = tokenize(NULL, delim, &pos);
 	}
-	free(path);
 	free(filename);
 	return (args);
 }
@@ -72,5 +71,6 @@ char *path_concat(char *s1, char *s2)
                 s2++;
         }
         *s = '\0';
-        return (s);
+	printf("s: %s\np: %s\n", s, p);
+        return (p);
 }
