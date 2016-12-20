@@ -9,16 +9,12 @@
  */
 void output(char **args)
 {
-/*	int i;*/
-
 	if (args[0][0] == '/')
 		execute(args);
 	else
 	{
 		args = check_path(args);
 		execute(args);
-/*		for (i = 0; args[i] != NULL; i++)
-		printf("%s\n", args[i]);*/
 	}
 }
 

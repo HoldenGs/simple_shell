@@ -8,63 +8,66 @@
  * Return: Pointer array to commands w/ first command replaced
  * if the file was found, or the orginal commands, if not found
  */
-char **check_path(char **commands)
+char **check_path(char **args)
 {
 	char *filename, *delim, *pos, *path, *dir;
 	struct stat st;
 
 	pos = NULL;
 	delim = ":";
-	path = _getenv("PATH");
+	path = hosh_findenv("PATH");
 	if (path == NULL)
 	{
-		_puts("Uh oh! Couldn't find the PATH!\n");
+		_puts("You have no PATH? What are you, crazy?\n");
 		_exit(22);
 	}
 	dir = tokenize(path, delim, &pos);
 	while (dir != NULL)
 	{
-		filename = _strcat(dir, commands[0]);
+		filename = path_concat(dir, args[0]);
 		if (stat(filename, &st) == 0)
 		{
-			commands[0] = filename;
-			free(path);
-			return (commands);
+			args[0] = filename;
+			return (args);
 		}
 		dir = tokenize(NULL, delim, &pos);
 	}
-	free(path);
 	free(filename);
-	return (commands);
+	return (args);
 }
 
 /**
- * _getenv - Find the value of a given environment variable
- * @name: Name of the environment variable
+ * path_concat - combine two strings together with a '/' in between
  *
- * Description: This was built specifically for use with check_path
- * function. May need to be removed or changed based on Holden's code
+ * @s1: The string to start the new combined string
+ * @s2: The string to attach to the end of new combined string
  *
- * Return: Pointer to the value of the variable if variable found,
- * NULL if no variable found with given name
+ * Return: Pointer to the new string
  */
-char *_getenv(char *name)
+char *path_concat(char *s1, char *s2)
 {
-	char *value;
-	int i, j;
+        char *s, *p;
+        int s1len, s2len;
 
-	i = 0;
-	while (environ[i] != NULL)
-	{
-		j = 0;
-		while (environ[i][j] == name[j])
-			j++;
-		if (environ[i][j] == '=' && name[j] == '\0')
-		{
-			value = _strdup(&environ[i][j + 1]);
-			return (value);
-		}
-		i++;
-	}
-	return (NULL);
+        s1len = s2len = 0;
+        s1len = _strlen(s1);
+        s2len = _strlen(s2);
+        s = smart_alloc((s1len + s2len + 2) * sizeof(char));
+	p = s;
+        while (*s1 != '\0')
+        {
+                *s = *s1;
+                s++;
+                s1++;
+        }
+        *s = '/';
+        s++;
+        while (*s2 != '\0')
+        {
+                *s = *s2;
+                s++;
+                s2++;
+        }
+        *s = '\0';
+        return (p);
 }

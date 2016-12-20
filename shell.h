@@ -12,11 +12,11 @@ typedef struct addresses
 } addr_t;
 
 /* --Builtin Struct--*/
-typedef struct built_struct
+typedef struct builtins_s
 {
 	char *name;
 	int (*func)(char **);
-} builtins;
+} builtins_t;
 
 /* --Library Headers-- */
 #include <stdio.h>
@@ -29,20 +29,47 @@ typedef struct built_struct
 #include <fcntl.h>
 #include <signal.h>
 
-/* --Functions-- */
+/* --General Functions-- */
 void loop(void);
 char **make_args(char *input);
+int wordcount(char *str);
 char *tokenize(char *input, const char *delim, char **saveptr);
 void output(char **args);
 void execute(char **args);
 void *smart_alloc(size_t size);
+void sighandler(int sig_num);
+
+/* --Path Functions-- */
+char **check_path(char **args);
+char *path_concat(char *s1, char *s2);
+
+/* --Builtin Functions-- */
+int check_builtins(char **args);
+int hosh_exit(char **args);
+
+/* --Env Functions-- */
+void hosh_printenv(void);
+int hosh_unsetenv(char *name);
+int hosh_setenv(char *name, char *value, int overwrite);
+char *hosh_findenv(char *name);
+int hosh_addenv(char *newvar, char *name);
+
+/* --Print Functions-- */
 void _puts(char *str);
 int _putchar(char c);
-int wordcount(char *str);
+
+/* --String Functions-- */
 char *_strdup(char *str);
 int _strlen(char *s);
+char *_strchr(char *s, char c);
 char *_strpbrk(char *s, const char *accept);
 int _strspn(char *s, const char *accept);
+int _strncmp(char *s1, char *s2, int n);
+char *str_concat(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+
+/* --Math Functions-- */
+int _atoi(char *str);
 
 /* --Corbin-Functions-- */
 char *_getenv(char *name);

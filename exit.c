@@ -2,20 +2,22 @@
 
 /**
  * hosh_exit - exit the current child process & free what must be free'd
- * @commands: Double pointer to the command and given args
+ * @args: Double pointer to the command and given args
+ *
+ * Return: 0 if success, 1 if failure
  */
-int hosh_exit(char **commands)
+int hosh_exit(char **args)
 {
 	int status;
 
-	if (commands[1] == NULL)
+	if (args[1] == NULL)
 	{
-		free(commands);
+		free(args);
 		_exit(0);
 	}
-	else if ((status = atoi(commands[1])) != -1)
+	else if ((status = _atoi(args[1])) != -1)
 	{
-		free(commands);
+		free(args);
 		_exit(status);
 	}
 	else

@@ -1,20 +1,20 @@
 #include "shell.h"
 
-int check_builtins(char **commands)
+int check_builtins(char **args)
 {
-	builtins built_list[] = {
+	builtins_t builtins[] = {
 		{"exit", hosh_exit},
 		{NULL, NULL}
 	};
 	int i, len;
 
 	i = 0;
-	len = _strlen(commands[0]);
-	while (built_list[i].name != NULL)
+	len = _strlen(args[0]);
+	while (builtins[i].name != NULL)
 	{
-		if (_strncmp(commands[0], built_list[i].name, len) == 0)
+		if (_strncmp(args[0], builtins[i].name, len) == 0)
 		{
-			if (built_list[i].func(commands))
+			if (builtins[i].func(args))
 				return (1);
 			return (0);
 		}
