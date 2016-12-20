@@ -25,12 +25,17 @@ int main(int ac, char **av, char **env)
  */
 void loop(void)
 {
-	char *input, **args;
-	int n, i;
+	char *input, **args, *envvar, *envval;
+	int n, i, ret;
 	size_t size;
 
+	envvar = "HOME";
+	envval = "MY HOUSE YEEEEUUUUUUUUHH BIZZZZZZOOOOYYY";
 	size = 0;
 	input = NULL;
+	hosh_printenv();
+	hosh_setenv(envvar, envval, 1);
+	hosh_printenv();
 	while (1)
 	{
 		_puts("HoldenGs$ ");
