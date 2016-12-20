@@ -49,7 +49,8 @@ void loop(void)
 			_exit(0);
 		}
 		args = make_args(input);
-		output(args);
+		if (check_builtins(args) == 0)
+			output(args);
 		looped++;
 	}
 	free(args);
