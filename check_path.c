@@ -15,7 +15,7 @@ char **check_path(char **args)
 
 	pos = NULL;
 	delim = ":";
-	path = hosh_findenv("PATH");
+	path = hosh_copypath("PATH");
 	if (path == NULL)
 	{
 		_puts("You have no PATH? What are you, crazy?\n");
@@ -70,4 +70,30 @@ char *path_concat(char *s1, char *s2)
         }
         *s = '\0';
         return (p);
+}
+
+/**
+ * hosh_copypath - Find PATH and make a duplicate of its value
+ * @name: PATH variable name
+ *
+ * Return: PATH value, NULL if it can't be found
+ */
+char *hosh_copypath(char *name)
+{
+        char **envp, *path;
+        int len, i;
+
+	i = 0;
+        envp = environ;
+        len = _strlen(name);
+        while (envp[i] != NULL)
+        {
+                if (_strncmp(envp[i], name, len) == 0)
+		{
+			path = strdup(&envp[i][len + 1]);
+                        return (path);
+		}
+                i++;;
+        }
+        return (NULL);
 }
