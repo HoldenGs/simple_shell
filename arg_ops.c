@@ -21,6 +21,8 @@ char **make_args(char *input)
 	while (arg != NULL)
 	{
 		args[i] = arg;
+		if (args[i][0] == '#')
+			break;
 		arg = tokenize(NULL, delims, &pos);
 		i++;
 	}

@@ -43,6 +43,7 @@ void sighandler(int sig_num);
 /* --Path Functions-- */
 char **check_path(char **args);
 char *path_concat(char *s1, char *s2);
+char *hosh_copypath(char *name);
 
 /* --Builtin Functions-- */
 int check_builtins(char **args);
