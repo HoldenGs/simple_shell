@@ -37,4 +37,8 @@ int _strlen(char *s);
 char *_strpbrk(char *s, const char *accept);
 int _strspn(char *s, const char *accept);
 
+/* --Corbin-Functions-- */
+char *_getenv(char *name);
+char *_strcat(char *frontstr, char *backstr);
+char **check_path(char **commands);
 #endif /* SHELL_H */
