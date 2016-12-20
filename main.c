@@ -29,7 +29,7 @@ void loop(void)
 	int n, i, ret;
 	size_t size;
 
-	envvar = "HOME";
+	envvar = "YO_BOY";
 	envval = "MY HOUSE YEEEEUUUUUUUUHH BIZZZZZZOOOOYYY";
 	size = 0;
 	input = NULL;

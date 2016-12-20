@@ -19,7 +19,6 @@ void hosh_printenv(void)
 		}
 		_putchar('\n');
 	}
-	printf("env number: %d\n", i);
 }
 
 /**
@@ -74,11 +73,8 @@ int hosh_setenv(char *name, char *value, int overwrite)
 	hosh_unsetenv(name);
 	envp = smart_alloc(sizeof(char) * (_strlen(name) + 1));
 	envp = _strcpy(envp, name);
-	printf("envp = %s\n", envp);
 	envp = str_concat(envp, equals);
 	envp = str_concat(envp, value);
-	printf("value = %s\n", value);
-	printf("envp = %s\n", envp);
 	if (hosh_addenv(envp, name) != 0)
 		return (-1);
 	return (0);
@@ -132,7 +128,6 @@ int hosh_addenv(char *newvar, char *name)
 			newenv++;
 			environ++;
 		}
-		printf("var = %s\n", newvar);
 		*newenv = newvar;
 		newenv++;
 		*newenv = NULL;
