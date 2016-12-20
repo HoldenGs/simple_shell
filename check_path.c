@@ -29,12 +29,10 @@ char **check_path(char **args)
 		if (stat(filename, &st) == 0)
 		{
 			args[0] = filename;
-			free(path);
 			return (args);
 		}
 		dir = tokenize(NULL, delim, &pos);
 	}
-	free(path);
 	free(filename);
 	return (args);
 }
@@ -72,5 +70,5 @@ char *path_concat(char *s1, char *s2)
                 s2++;
         }
         *s = '\0';
-        return (s);
+        return (p);
 }
