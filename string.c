@@ -9,15 +9,12 @@
  */
 int _strlen(char *s)
 {
-	int n, m;
+	int m;
 
-	n = m = 0;
-	while (*(s + m) != '\0')
-	{
-		++n;
+	m = 0;
+	while (s[m] != '\0')
 		m++;
-	}
-	return (n);
+	return (m);
 }
 
 /**
@@ -36,9 +33,7 @@ char *_strdup(char *str)
 	if (str == NULL)
 		return (NULL);
 	size = _strlen(str);
-
 	a = smart_alloc((size + 1) * sizeof(char));
-
 	if (a == NULL)
 		return (NULL);
 
@@ -48,42 +43,6 @@ char *_strdup(char *str)
 	}
 	a[i] = str[i];
 	return (a);
-}
-
-/**
- * wordcount - count the number of words in a string
- *
- * @str: string
- *
- * Return: number of words in @str
- */
-int wordcount(char *str)
-{
-	int wc, state, i;
-
-	i = wc = 0;
-	state = OUT;
-	while (str[i] != '\0')
-	{
-		switch (str[i])
-		{
-		case '\0':
-		case ' ':
-		case '\t':
-		case '\n':
-			if (state == IN)
-			{
-				state = OUT;
-				wc++;
-			}
-			i++;
-			break;
-		default:
-			state = IN;
-			i++;
-		}
-	}
-	return (wc);
 }
 
 /**
@@ -97,24 +56,43 @@ int wordcount(char *str)
  */
 int _strspn(char *s, const char *accept)
 {
-	int i = 0, j = 0, flag = 0, count = 0;
+	int i, j, flag, count;
 
+	i = flag = count = 0;
 	while (s[i] && count == i)
 	{
-		while (accept[j] && !flag)
+		for (j = 0; accept[j] && !flag; j++)
 		{
 			if (accept[j] == s[i])
 			{
 				count++;
 				flag = 1;
 			}
-			j++;
 		}
-		j = 0;
 		flag = 0;
 		i++;
 	}
 	return (count);
+}
+
+/**
+ * _strchr - locate a character in a string
+ *
+ * @s: pointer to string
+ * @c: character
+ *
+ * Return: pointer to first occurrence of @c in @s
+ */
+char *_strchr(char *s, char c)
+{
+	int i;
+
+	for (i = 0; s[i] != 0; i++)
+		if (s[i] == c)
+			return (s + i);
+	if (s[i] == c)
+		return (s + i);
+	return (NULL);
 }
 
 /**
@@ -128,8 +106,9 @@ int _strspn(char *s, const char *accept)
  */
 char *_strpbrk(char *s, const char *accept)
 {
-	int i = 0, j = 0;
+	int i, j;
 
+	i = 0;
 	while (s[i])
 	{
 		j = 0;
@@ -141,5 +120,5 @@ char *_strpbrk(char *s, const char *accept)
 		}
 		i++;
 	}
-	return ('\0');
+	return (NULL);
 }
