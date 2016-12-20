@@ -1,5 +1,7 @@
 #include "shell.h"
 
+int flag;
+
 /**
  * main - initialization of shell
  *
@@ -33,10 +35,12 @@ void loop(void)
 	int looped;
 	size_t size;
 
+	signal(SIGINT, sighandler);
 	size = looped = 0;
 	input = NULL;
 	while (1)
 	{
+		flag = 0;
 		_puts("HoldenGs$ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
@@ -50,9 +54,24 @@ void loop(void)
 		}
 		args = make_args(input);
 		if (check_builtins(args) == 0)
+		{
+			flag = 1;
 			output(args);
+		}
 		looped++;
 	}
 	free(args);
 	free(input);
+}
+
+/**
+ * sighandler - Print out the prompt if ctrl-C is hit
+ * @sig_num: Unused variable necessary for sighandler function types
+ */
+void sighandler(int sig_num)
+{
+	(void)sig_num;
+	if (flag == 0)
+		_puts("\nHoldenGs$ ");
+	signal(SIGINT, sighandler);
 }
