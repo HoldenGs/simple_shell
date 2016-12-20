@@ -27,3 +27,39 @@ char **make_args(char *input)
 	args[i] = NULL;
 	return (args);
 }
+
+/**
+ * wordcount - count the number of words in a string
+ *
+ * @str: string
+ *
+ * Return: number of words in @str
+ */
+int wordcount(char *str)
+{
+	int wc, state, i;
+
+	i = wc = 0;
+	state = OUT;
+	while (str[i] != '\0')
+	{
+		switch (str[i])
+		{
+		case '\0':
+		case ' ':
+		case '\t':
+		case '\n':
+			if (state == IN)
+			{
+				state = OUT;
+				wc++;
+			}
+			i++;
+			break;
+		default:
+			state = IN;
+			i++;
+		}
+	}
+	return (wc);
+}
