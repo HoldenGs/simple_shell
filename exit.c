@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * ext - exit the current child process & free what must be free'd
+ * hosh_exit - exit the current child process & free what must be free'd
  * @commands: Double pointer to the command and given args
  */
-void ext(char **commands)
+int hosh_exit(char **commands)
 {
 	int status;
 
@@ -20,4 +20,5 @@ void ext(char **commands)
 	}
 	else
 		_puts("Illegal number\n");
+	return (1);
 }
