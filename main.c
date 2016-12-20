@@ -43,8 +43,8 @@ void loop(void)
 			if (looped != 0)
 			{
 				free(args);
-				free(input);
 			}
+			free(input);
 			_putchar('\n');
 			_exit(0);
 		}
