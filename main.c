@@ -11,6 +11,9 @@
  */
 int main(int ac, char **av, char **env)
 {
+	(void)ac;
+	(void)env;
+	(void)av;
 	loop();
 	return (0);
 }
@@ -26,17 +29,28 @@ int main(int ac, char **av, char **env)
 void loop(void)
 {
 	char *input, **args;
-	int n, i;
+/*	int n, i;*/
+	int i;
 	size_t size;
 
-	size = 0;
+	size = i = 0;
 	input = NULL;
 	while (1)
 	{
 		_puts("HoldenGs$ ");
-		getline(&input, &size, stdin);
+		if (getline(&input, &size, stdin) == -1)
+		{
+			if (i != 0)
+			{
+				free(args);
+				free(input);
+			}
+			_putchar('\n');
+			_exit(0);
+		}
 		args = make_args(input);
 		output(args);
+		i++;
 	}
 	free(args);
 	free(input);
