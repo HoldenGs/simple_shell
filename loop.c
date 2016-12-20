@@ -31,7 +31,6 @@ int main(int ac, char **av, char **env)
 void loop(void)
 {
 	char *input, **args;
-/*	int n, i;*/
 	int looped;
 	size_t size;
 
