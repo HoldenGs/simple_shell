@@ -11,6 +11,13 @@ typedef struct addresses
 	struct addresses *next;
 } addr_t;
 
+/* --Builtin Struct--*/
+typedef struct built_struct
+{
+	char *name;
+	int (*func)(char **);
+} builtins;
+
 /* --Library Headers-- */
 #include <stdio.h>
 #include <unistd.h>
@@ -41,5 +48,7 @@ int _strspn(char *s, const char *accept);
 char *_getenv(char *name);
 char *_strcat(char *frontstr, char *backstr);
 char **check_path(char **commands);
-void ext(char **commands);
+int hosh_exit(char **commands);
+int _strncmp(char *c1, char *c2, int n);
+int check_builtins(char **commands);
 #endif /* SHELL_H */
