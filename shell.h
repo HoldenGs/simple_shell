@@ -79,4 +79,5 @@ int hosh_exit(char **commands);
 int _strncmp(char *c1, char *c2, int n);
 int check_builtins(char **commands);
 void sighandler(int sig_num);
+char *hosh_copypath(char *name);
 #endif /* SHELL_H */
