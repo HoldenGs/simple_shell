@@ -30,17 +30,17 @@ void loop(void)
 {
 	char *input, **args;
 /*	int n, i;*/
-	int i;
+	int looped;
 	size_t size;
 
-	size = i = 0;
+	size = looped = 0;
 	input = NULL;
 	while (1)
 	{
 		_puts("HoldenGs$ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
-			if (i != 0)
+			if (looped != 0)
 			{
 				free(args);
 				free(input);
@@ -50,7 +50,7 @@ void loop(void)
 		}
 		args = make_args(input);
 		output(args);
-		i++;
+		looped++;
 	}
 	free(args);
 	free(input);
