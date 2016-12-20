@@ -44,6 +44,7 @@ void execute(char **args)
 	{
 		execve(args[0], args, environ);
 		perror("Error");
+		free(args);
 		_exit(1);
 	}
 	else
