@@ -9,13 +9,13 @@
  */
 void output(char **args)
 {
-	int i;
-
 	if (args[0][0] == '/')
 		execute(args);
 	else
-		for (i = 0; args[i] != NULL; i++)
-			printf("%s\n", args[i]);
+	{
+		args = check_path(args);
+		execute(args);
+	}
 }
 
 /**
@@ -28,11 +28,21 @@ void output(char **args)
 void execute(char **args)
 {
 	pid_t pid;
-	int status;
+	int status = 0;
 
 	pid = fork();
+	if (pid == -1)
+	{
+		perror("Error");
+		_exit(99);
+	}
 	if (pid == 0)
-		status = execve(args[0], args, environ);
+	{
+		execve(args[0], args, environ);
+		perror("Error");
+		free(args);
+		_exit(1);
+	}
 	else
 		wait(&status);
 }
