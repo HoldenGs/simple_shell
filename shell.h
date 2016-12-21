@@ -49,7 +49,7 @@ int check_builtins(char **args);
 int hosh_exit(char **args);
 
 /* --Env Functions-- */
-void hosh_printenv(void);
+int hosh_printenv(char **args);
 int hosh_unsetenv(char *name);
 int hosh_setenv(char *name, char *value, int overwrite);
 char *hosh_findenv(char *name);
