@@ -9,13 +9,9 @@ int check_builtins(char **args)
 	};
 	int i, len;
 
-	i = 0;
 	len = _strlen(args[0]);
-	while (builtins[i].name != NULL)
-	{
+	for (i = 0; builtins[i].name != NULL; i++)
 		if (_strncmp(args[0], builtins[i].name, len) == 0)
 			return (builtins[i].func(args));
-		i++;
-	}
-	return (0);
+	return (-1);
 }

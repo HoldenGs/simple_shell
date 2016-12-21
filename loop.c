@@ -1,7 +1,5 @@
 #include "shell.h"
 
-int flag;
-
 /**
  * main - initialization of shell
  *
@@ -35,11 +33,13 @@ void loop(void)
 	size_t size;
 
 	signal(SIGINT, sighandler);
-	size = looped = 0;
+	signal(SIGQUIT, SIG_IGN);
+	size = 0;
+	looped = 0;
 	input = NULL;
 	while (1)
 	{
-		flag = 0;
+		inchild = 0;
 		_puts("HoldenGs$ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
@@ -51,13 +51,14 @@ void loop(void)
 			_putchar('\n');
 			_exit(0);
 		}
-		args = make_args(input);
-		if (check_builtins(args) == 0)
+		if (input[0] != '\n' && input[0] != '#')
 		{
-			flag = 1;
+			args = make_args(input);
+			if (check_builtins(args) == 0)
+				inchild = 1;
 			output(args);
+			looped++;
 		}
-		looped++;
 	}
 	free(args);
 	free(input);
@@ -70,7 +71,7 @@ void loop(void)
 void sighandler(int sig_num)
 {
 	(void)sig_num;
-	if (flag == 0)
+	if (inchild == 0)
 		_puts("\nHoldenGs$ ");
 	signal(SIGINT, sighandler);
 }

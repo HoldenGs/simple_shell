@@ -20,3 +20,19 @@ void *smart_alloc(size_t size)
 	}
 	return (ptr);
 }
+
+/**
+ * free_array - frees a pointer array of strings
+ *
+ * @array: 2d array
+ *
+ * Return: void
+ */
+void free_array(char **array)
+{
+	int i;
+
+	for (i = 0; array[i] != NULL; i++)
+		free(array[i]);
+	free(array);
+}

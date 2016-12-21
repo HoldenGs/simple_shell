@@ -3,7 +3,6 @@
 /**
  * check_path - Check the path for the given file and if found
  * replaces command argument with new full file name
- *
  * @commands: Pointer array holding command & all command args
  *
  * Return: Pointer array to commands w/ first command replaced
@@ -23,27 +22,24 @@ char **check_path(char **args)
 		_exit(22);
 	}
 	dir = tokenize(path, delim, &pos);
-	if (dir != NULL)
+	while (dir != NULL)
 	{
 		filename = path_concat(dir, args[0]);
 		if (stat(filename, &st) == 0)
 		{
 			args[0] = filename;
+			free(path);
 			return (args);
 		}
-		else
-		{
-			_puts("Not a command, silly head!\n");
-			free_array(args);
-			return (NULL);
-		}
+		dir = tokenize(NULL, delim, &pos);
 	}
 	free(filename);
+	free(path);
 	return (args);
 }
 
 /**
- * _strcat - combine two strings together with a '/' in between
+ * path_concat - combine two strings together with a '/' in between
  *
  * @s1: The string to start the new combined string
  * @s2: The string to attach to the end of new combined string
@@ -77,7 +73,6 @@ char *path_concat(char *s1, char *s2)
         *s = '\0';
         return (p);
 }
-
 
 /**
  * hosh_copypath - Find PATH and make a duplicate of its value
