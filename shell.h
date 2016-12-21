@@ -53,12 +53,12 @@ char *_copypath(char *name);
 /* --Builtin Functions-- */
 int check_builtins(char **args);
 int hosh_printenv(char **args);
+int hosh_setenv(char **args);
 int hosh_unsetenv(char **args);
 int hosh_exit(char **args);
 
 /* --Env Functions-- */
 int _unsetenv(char *name);
-int _setenv(char *name, char *value, int overwrite);
 char *_findenv(char *name);
 int _addenv(char *newvar, char *name);
 

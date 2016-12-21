@@ -31,34 +31,6 @@ int _unsetenv(char *name)
 }
 
 /**
- * _setenv - set an environment variable
- *
- * @name: variable name
- * @value: variable value
- * @overwrite: integer determining whether we overwite an existing variable
- *
- * Return: 0 on success, -1 on failure
- */
-int _setenv(char *name, char *value, int overwrite)
-{
-	char *envp, *equals;
-
-	equals = "=";
-	if (name == NULL || name[0] == '\0' || value == NULL)
-		return (-1);
-	if (_findenv(name) != NULL && overwrite == 0)
-		return (0);
-	_unsetenv(name);
-	envp = smart_alloc(sizeof(char) * (_strlen(name) + 1));
-	envp = _strcpy(envp, name);
-	envp = str_concat(envp, equals);
-	envp = str_concat(envp, value);
-	if (_addenv(envp, name) != 0)
-		return (-1);
-	return (0);
-}
-
-/**
  * _findenv - get the pointer to an environment variable
  *
  * @name: variable name

@@ -1,6 +1,43 @@
 #include "shell.h"
 
 /**
+ * hosh_setenv - set an environment variable
+ *
+ * @name: variable name
+ * @args: argument array
+ * @overwrite: integer determining whether we overwite an existing variable
+ *
+ * Return: 0 on success, -1 on failure
+ */
+int hosh_setenv(char **args)
+{
+	char *envp;
+	int i, j, len;
+
+	if (args[1] == NULL || args[2] == NULL || args[1][0] == '\0')
+	{
+		_puts("setenv syntax: setenv VARIABLE VALUE\n");
+		return (-1);
+	}
+	_unsetenv(args[1]);
+	len = 0;
+	for (i = 2; args[i] != NULL; i++)
+		for (j = 0; args[i][j] != '\0'; j++, len++)
+	envp = smart_alloc(sizeof(char) * (len + i - 1));
+	envp = _strcpy(envp, args[1]);
+	envp = str_concat(envp, "=");
+	for (i = 2; args[i] != NULL; i++)
+	{
+		envp = str_concat(envp, args[i]);
+		if (args[i + 1] != NULL)
+			envp = str_concat(envp, " ");
+	}
+	if (_addenv(envp, args[1]) != 0)
+		return (-1);
+	return (0);
+}
+
+/**
  * hosh_unsetenv - unset an environment variable
  *
  * @args: argument array
