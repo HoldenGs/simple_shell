@@ -23,7 +23,7 @@ char **check_path(char **args)
 		_exit(22);
 	}
 	dir = tokenize(path, delim, &pos);
-	while (dir != NULL)
+	if (dir != NULL)
 	{
 		filename = path_concat(dir, args[0]);
 		if (stat(filename, &st) == 0)
@@ -31,7 +31,12 @@ char **check_path(char **args)
 			args[0] = filename;
 			return (args);
 		}
-		dir = tokenize(NULL, delim, &pos);
+		else
+		{
+			_puts("Not a command, silly head!\n");
+			free_array(args);
+			return (NULL);
+		}
 	}
 	free(filename);
 	return (args);
