@@ -18,6 +18,7 @@ int _atoi(char *str)
                         return (-1);
                 num = num * 10;
                 num += str[i] - '0';
+		i++;
         }
         return (num);
 }
