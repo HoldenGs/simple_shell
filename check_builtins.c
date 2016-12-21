@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * check_builtins - Check to see if given command is a builtin
+ * @args: Array holding command and all its arguments
+ *
+ * Return: the return value of the builtin called on success,
+ * or -1 if it failed
+ */
 int check_builtins(char **args)
 {
 	builtins_t builtins[] = {
@@ -7,6 +14,7 @@ int check_builtins(char **args)
 		{"env", hosh_printenv},
 		{"unsetenv", hosh_unsetenv},
 		{"setenv", hosh_setenv},
+		{"help", hosh_help},
 		{NULL, NULL}
 	};
 	int i, len;

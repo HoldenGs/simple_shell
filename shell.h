@@ -8,6 +8,11 @@ extern char **environ;
 int inchild;
 
 /* --Address List-- */
+/**
+ * struct addresses - Struct of a node to hold a list of addresses
+ * @address: Address being stored
+ * @next: Pointer to next node in list
+ */
 typedef struct addresses
 {
 	void *address;
@@ -15,11 +20,28 @@ typedef struct addresses
 } addr_t;
 
 /* --Builtin Struct--*/
+/**
+ * struct builtins_s - Struct for builtins names & ptrs to the function
+ * @name: Name of the builtin
+ * @func: Pointer to function to call when name is inputted
+ */
 typedef struct builtins_s
 {
 	char *name;
 	int (*func)(char **);
 } builtins_t;
+
+/* --Help Struct --*/
+/**
+ * struct help_s - Struct for different descriptions of builtins
+ * @name: Name of which builtin to get help for
+ * @func: Function to print the help for that function
+ */
+typedef struct help_s
+{
+	char *name;
+	void (*func)();
+} help_t;
 
 /* --Library Headers-- */
 #include <stdio.h>
@@ -79,4 +101,12 @@ char *_strcpy(char *dest, char *src);
 /* --Math Functions-- */
 int _atoi(char *str);
 
+/* --Help Functions-- */
+int hosh_help(char **args);
+void help_exit(void);
+void help_env(void);
+void help_setenv(void);
+void help_unsetenv(void);
+void help_help(void);
+void print_help(void);
 #endif /* SHELL_H */
