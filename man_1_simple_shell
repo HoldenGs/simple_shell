@@ -1,0 +1,22 @@
+.TH HOSH 1 "DECEMBER 2016" Linux "Holberton School Manuals"
+.SH NAME
+hosh - command interpretor (shell)
+.SH SYNOPSIS
+.B hosh [command file [argument ...]]
+.SH DESCRIPTION
+.B hosh
+is a command interpretor created as a project for Holberton School. Under set guidelines it aims to create a new shell with much of the basic functionality of the standard Linux shell most systems use. It can run basic commands from the PATH or use their full path filenames. As well as run some builtin functions.
+.SH Builtins
+.IP exit
+Exit current process and free up memory
+.IP env
+Print out all environment variables and their, one line per variable
+.IP setenv
+Change the value of an environment variable, if no environment variable exits create one
+.IP unsetenv
+Remove an environment variable
+.SH BUGS
+Not every possible input has been tested, so some inputs may cause unexpected results. Currently this program does not successfully free all memory that it allocates during runtime.
+.SH AUTHORS
+.B Holden Grissett,
+.B Corbin Coleman
