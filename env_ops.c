@@ -68,7 +68,7 @@ int hosh_unsetenv(char *name)
 int hosh_setenv(char *name, char *value, int overwrite)
 {
 	char *envp, *equals;
-	int len;
+	/*int len;*/
 
 	equals = "=";
 	if (name == NULL || name[0] == '\0' || value == NULL)

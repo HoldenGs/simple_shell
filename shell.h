@@ -14,7 +14,6 @@ typedef struct addresses
 	struct addresses *next;
 } addr_t;
 
-
 /* --Builtin Struct--*/
 typedef struct builtins_s
 {

@@ -13,5 +13,10 @@ int check_builtins(char **args)
 	for (i = 0; builtins[i].name != NULL; i++)
 		if (_strncmp(args[0], builtins[i].name, len) == 0)
 			return (builtins[i].func(args));
+<<<<<<< HEAD
+=======
+		i++;
+	}
+>>>>>>> 76538d046cc0d3fa214f93412d485625b72d2570
 	return (-1);
 }

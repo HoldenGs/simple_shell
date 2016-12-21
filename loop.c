@@ -34,6 +34,7 @@ void loop(void)
 
 	signal(SIGINT, sighandler);
 	signal(SIGQUIT, SIG_IGN);
+
 	size = 0;
 	looped = 0;
 	input = NULL;
