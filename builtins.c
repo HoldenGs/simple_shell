@@ -3,9 +3,7 @@
 /**
  * hosh_setenv - set an environment variable
  *
- * @name: variable name
  * @args: argument array
- * @overwrite: integer determining whether we overwite an existing variable
  *
  * Return: 0 on success, -1 on failure
  */

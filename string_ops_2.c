@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- * _strcmp - compare two strings
+ * _strncmp - compare two strings
  *
  * @s1: first string to compare with @s2
  * @s2: second string from which to compare @s1
+ * @n: Length of string to compare to
  *
  * Return: integer value of characters of @s1 minus character number of @s2
  */

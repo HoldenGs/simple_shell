@@ -56,7 +56,7 @@ char *_findenv(char *name)
 /**
  * _addenv - add or modify an environment variable
  *
- * @var: variable and value
+ * @newvar: variable and value
  * @name: name of variable to add or modify
  *
  * Return: 0 if success, -1 if failure
@@ -68,7 +68,8 @@ int _addenv(char *newvar, char *name)
 
 	if (_findenv(name) == NULL)
 	{
-		for (i = 0; environ[i] != NULL; i++);
+		for (i = 0; environ[i] != NULL; i++)
+			;
 		newenv = smart_alloc(sizeof(char *) * (i + 2));
 		newhead = newenv;
 		i = 0;
