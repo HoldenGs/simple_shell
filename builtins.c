@@ -23,7 +23,8 @@ int hosh_setenv(char **args)
 	len = 0;
 	for (i = 2; args[i] != NULL; i++)
 		for (j = 0; args[i][j] != '\0'; j++, len++)
-			envp = smart_alloc(sizeof(char) * (len + i - 1));
+			;
+	envp = smart_alloc(sizeof(char) * (len + i - 1));
 	envp = _strcpy(envp, args[1]);
 	envp = str_concat(envp, "=");
 	for (i = 2; args[i] != NULL; i++)
@@ -82,8 +83,9 @@ int hosh_exit(char **args)
 
 /**
  * hosh_printenv - print the list of environment variables
+ * @args: Arguments passed to hosh_printenv
  *
- * Return: void
+ * Return: 0 on success, 1 on failure
  */
 int hosh_printenv(char **args)
 {
@@ -103,7 +105,7 @@ int hosh_printenv(char **args)
 		}
 		return (0);
 	}
-	return (-1);
+	return (1);
 }
 
 /**
