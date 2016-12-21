@@ -39,8 +39,11 @@ int wordcount(char *str);
 char *tokenize(char *input, const char *delim, char **saveptr);
 void output(char **args);
 void execute(char **args);
-void *smart_alloc(size_t size);
 void sighandler(int sig_num);
+
+/* --Memory Functions-- */
+void free_array(char **array);
+void *smart_alloc(size_t size);
 
 /* --Path Functions-- */
 char **check_path(char **args);
