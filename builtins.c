@@ -23,7 +23,7 @@ int hosh_setenv(char **args)
 	len = 0;
 	for (i = 2; args[i] != NULL; i++)
 		for (j = 0; args[i][j] != '\0'; j++, len++)
-	envp = smart_alloc(sizeof(char) * (len + i - 1));
+			envp = smart_alloc(sizeof(char) * (len + i - 1));
 	envp = _strcpy(envp, args[1]);
 	envp = str_concat(envp, "=");
 	for (i = 2; args[i] != NULL; i++)
@@ -66,13 +66,17 @@ int hosh_exit(char **args)
 		free(args);
 		_exit(0);
 	}
-	else if ((status = _atoi(args[1])) != -1)
+	else
 	{
+		status = _atoi(args[1]);
+		if (status == -1)
+		{
+			_puts("Illegal number\n");
+			return (1);
+		}
 		free(args);
 		_exit(status);
 	}
-	else
-		_puts("Illegal number\n");
 	return (1);
 }
 
@@ -100,4 +104,51 @@ int hosh_printenv(char **args)
 		return (0);
 	}
 	return (-1);
+}
+
+/**
+ * hosh_help - Print out help for given commands or list all builtins available
+ * @args: List of arguments passed to hosh_help
+ *
+ * Return: 0 on success, 1 on failure
+ */
+int hosh_help(char **args)
+{
+	help_t builtins[] = {
+		{"exit", help_exit},
+		{"setenv", help_setenv},
+		{"unsetenv", help_unsetenv},
+		{"env", help_env},
+		{"help", help_help},
+		{NULL, NULL}
+	};
+	int i, j, arglen, foundhelp;
+
+	foundhelp = 0;
+	i = 1;
+	if (args[1] == NULL)
+	{
+		print_help();
+		return (0);
+	}
+	while (args[i] != NULL)
+	{
+		j = 0;
+		while (builtins[j].name != NULL)
+		{
+			arglen = _strlen(args[i]);
+			if (_strncmp(builtins[j].name, args[i], arglen) == 0)
+			{
+				foundhelp++;
+				builtins[j].func();
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (foundhelp > 0)
+		return (0);
+	_puts("Sorry. Could not find help for that command.\n");
+	return (1);
 }
