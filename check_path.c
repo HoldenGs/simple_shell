@@ -28,11 +28,13 @@ char **check_path(char **args)
 		if (stat(filename, &st) == 0)
 		{
 			args[0] = filename;
+			free(path);
 			return (args);
 		}
 		dir = tokenize(NULL, delim, &pos);
 	}
 	free(filename);
+	free(path);
 	return (args);
 }
 
