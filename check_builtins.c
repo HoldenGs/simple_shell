@@ -4,6 +4,7 @@ int check_builtins(char **args)
 {
 	builtins_t builtins[] = {
 		{"exit", hosh_exit},
+		{"env", hosh_printenv},
 		{NULL, NULL}
 	};
 	int i, len;
@@ -13,11 +14,7 @@ int check_builtins(char **args)
 	while (builtins[i].name != NULL)
 	{
 		if (_strncmp(args[0], builtins[i].name, len) == 0)
-		{
-			if (builtins[i].func(args))
-				return (1);
-			return (0);
-		}
+			return (builtins[i].func(args));
 		i++;
 	}
 	return (0);

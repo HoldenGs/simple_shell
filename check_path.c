@@ -22,7 +22,7 @@ char **check_path(char **args)
 		_exit(22);
 	}
 	dir = tokenize(path, delim, &pos);
-	while (dir != NULL)
+	if (dir != NULL)
 	{
 		filename = path_concat(dir, args[0]);
 		if (stat(filename, &st) == 0)
@@ -31,7 +31,12 @@ char **check_path(char **args)
 			free(path);
 			return (args);
 		}
-		dir = tokenize(NULL, delim, &pos);
+		else
+		{
+			_puts("Not a command, silly head!\n");
+			free_array(args);
+			return (NULL);
+		}
 	}
 	free(filename);
 	free(path);
@@ -76,6 +81,7 @@ char *path_concat(char *s1, char *s2)
 
 /**
  * hosh_copypath - Find PATH and make a duplicate of its value
+ *
  * @name: PATH variable name
  *
  * Return: PATH value, NULL if it can't be found
@@ -92,7 +98,7 @@ char *hosh_copypath(char *name)
         {
                 if (_strncmp(envp[i], name, len) == 0)
 		{
-			path = strdup(&envp[i][len + 1]);
+			path = _strdup(&envp[i][len + 1]);
                         return (path);
 		}
                 i++;;

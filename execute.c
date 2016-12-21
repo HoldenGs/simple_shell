@@ -14,7 +14,8 @@ void output(char **args)
 	else
 	{
 		args = check_path(args);
-		execute(args);
+		if (args != NULL)
+			execute(args);
 	}
 }
 
