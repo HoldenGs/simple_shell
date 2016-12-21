@@ -3,7 +3,7 @@
 /**
  * make_args - make array of pointer arguments
  *
- * @av: argument structure
+ * @input: User input to be turned into arguments
  *
  * Return: argument list
  */
@@ -13,7 +13,7 @@ char **make_args(char *input)
 	int i, wc;
 
 	pos = NULL;
-	delims = " \n\t";
+	delims = "\n\t \r\a";
 	i = 0;
 	wc = wordcount(input);
 	args = smart_alloc(sizeof(char *) * (wc + 1));

@@ -20,11 +20,6 @@ int main(int ac, char **av, char **env)
 
 /**
  * loop - shell prompt loop
- *
- * @env: linked list of environment
- * @fd: pointer to file descriptor
- *
- * Return: 0 if success, -1 if failure
  */
 void loop(void)
 {

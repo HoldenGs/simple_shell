@@ -4,7 +4,7 @@
  * check_path - Check the path for the given file and if found
  * replaces command argument with new full file name
  *
- * @commands: Pointer array holding command & all command args
+ * @args: Pointer array holding command & all command args
  *
  * Return: Pointer array to commands w/ first command replaced
  * if the file was found, or the orginal commands, if not found
@@ -49,34 +49,34 @@ char **check_path(char **args)
  */
 char *path_concat(char *s1, char *s2)
 {
-        char *s, *p;
-        int s1len, s2len;
+	char *s, *p;
+	int s1len, s2len;
 
-        s1len = s2len = 0;
-        s1len = _strlen(s1);
-        s2len = _strlen(s2);
-        s = smart_alloc((s1len + s2len + 2) * sizeof(char));
+	s1len = s2len = 0;
+	s1len = _strlen(s1);
+	s2len = _strlen(s2);
+	s = smart_alloc((s1len + s2len + 2) * sizeof(char));
 	p = s;
-        while (*s1 != '\0')
-        {
-                *s = *s1;
-                s++;
-                s1++;
-        }
-        *s = '/';
-        s++;
-        while (*s2 != '\0')
-        {
-                *s = *s2;
-                s++;
-                s2++;
-        }
-        *s = '\0';
-        return (p);
+	while (*s1 != '\0')
+	{
+		*s = *s1;
+		s++;
+		s1++;
+	}
+	*s = '/';
+	s++;
+	while (*s2 != '\0')
+	{
+		*s = *s2;
+		s++;
+		s2++;
+	}
+	*s = '\0';
+	return (p);
 }
 
 /**
- * hosh_copypath - Find PATH and make a duplicate of its value
+ * _copypath - Find PATH and make a duplicate of its value
  *
  * @name: PATH variable name
  *
@@ -84,20 +84,20 @@ char *path_concat(char *s1, char *s2)
  */
 char *_copypath(char *name)
 {
-        char **envp, *path;
-        int len, i;
+	char **envp, *path;
+	int len, i;
 
 	i = 0;
-        envp = environ;
-        len = _strlen(name);
-        while (envp[i] != NULL)
-        {
-                if (_strncmp(envp[i], name, len) == 0)
+	envp = environ;
+	len = _strlen(name);
+	while (envp[i] != NULL)
+	{
+		if (_strncmp(envp[i], name, len) == 0)
 		{
 			path = _strdup(&envp[i][len + 1]);
-                        return (path);
+			return (path);
 		}
-                i++;;
-        }
-        return (NULL);
+		i++;
+	}
+	return (NULL);
 }
