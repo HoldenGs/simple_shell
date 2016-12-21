@@ -11,7 +11,6 @@ typedef struct addresses
 	struct addresses *next;
 } addr_t;
 
-
 /* --Builtin Struct--*/
 typedef struct builtins_s
 {
@@ -50,7 +49,7 @@ int check_builtins(char **args);
 int hosh_exit(char **args);
 
 /* --Env Functions-- */
-void hosh_printenv(void);
+int hosh_printenv(char **args);
 int hosh_unsetenv(char *name);
 int hosh_setenv(char *name, char *value, int overwrite);
 char *hosh_findenv(char *name);
@@ -73,4 +72,13 @@ char *_strcpy(char *dest, char *src);
 /* --Math Functions-- */
 int _atoi(char *str);
 
+/* --Corbin-Functions-- */
+char *_getenv(char *name);
+char *_strcat(char *frontstr, char *backstr);
+char **check_path(char **commands);
+int hosh_exit(char **commands);
+int _strncmp(char *c1, char *c2, int n);
+int check_builtins(char **commands);
+void sighandler(int sig_num);
+char *hosh_copypath(char *name);
 #endif /* SHELL_H */

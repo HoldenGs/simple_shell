@@ -35,6 +35,7 @@ void loop(void)
 	size_t size;
 
 	signal(SIGINT, sighandler);
+	signal(SIGQUIT, SIG_IGN);
 	size = looped = 0;
 	input = NULL;
 	while (1)
@@ -51,13 +52,16 @@ void loop(void)
 			_putchar('\n');
 			_exit(0);
 		}
-		args = make_args(input);
-		if (check_builtins(args) == 0)
+		if (input[0] != '\n' && input[0] != '#')
 		{
-			flag = 1;
-			output(args);
+			args = make_args(input);
+			if (check_builtins(args) == -1)
+			{
+				flag = 1;
+				output(args);
+			}
+			looped++;
 		}
-		looped++;
 	}
 	free(args);
 	free(input);
