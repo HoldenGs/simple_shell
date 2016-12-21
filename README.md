@@ -36,5 +36,5 @@ $ command args [...]
 - tokenize.c: Tokenize the given input. Functions inside: tokenize()
 
 ## Authors
-Holden Grissett
-Corbin Coleman
+<p>Holden Grissett</p>
+<p>Corbin Coleman</p>
