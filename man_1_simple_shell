@@ -15,6 +15,8 @@ Print out all environment variables and their, one line per variable
 Change the value of an environment variable, if no environment variable exits create one
 .IP unsetenv
 Remove an environment variable
+.IP help
+Displays all builtins if no argument given, otherwise displays brief description if builtin names are passed as arguments.
 .SH BUGS
 Not every possible input has been tested, so some inputs may cause unexpected results. Currently this program does not successfully free all memory that it allocates during runtime.
 .SH AUTHORS
