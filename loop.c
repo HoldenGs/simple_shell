@@ -55,7 +55,7 @@ void loop(void)
 		if (input[0] != '\n' && input[0] != '#')
 		{
 			args = make_args(input);
-			if (check_builtins(args) == 0)
+			if (check_builtins(args) == -1)
 			{
 				flag = 1;
 				output(args);
