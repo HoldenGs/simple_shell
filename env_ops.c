@@ -5,20 +5,25 @@
  *
  * Return: void
  */
-void hosh_printenv(void)
+int hosh_printenv(char **args)
 {
 	char c;
 	int i, j;
 
-	for (i = 0; environ[i]; i++)
+	if (args[1] == NULL)
 	{
-		for (j = 0; environ[i][j]; j++)
+		for (i = 0; environ[i]; i++)
 		{
-			c = environ[i][j];
-			_putchar(c);
+			for (j = 0; environ[i][j]; j++)
+			{
+				c = environ[i][j];
+				_putchar(c);
+			}
+			_putchar('\n');
 		}
-		_putchar('\n');
+		return (0);
 	}
+	return (1);
 }
 
 /**
@@ -63,7 +68,7 @@ int hosh_unsetenv(char *name)
 int hosh_setenv(char *name, char *value, int overwrite)
 {
 	char *envp, *equals;
-	int len;
+	/*int len;*/
 
 	equals = "=";
 	if (name == NULL || name[0] == '\0' || value == NULL)
