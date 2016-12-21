@@ -23,7 +23,7 @@ int main(int ac, char **av, char **env)
  */
 void loop(void)
 {
-	char *input, **args;
+	char *input, **args, *firstarg;
 	int looped;
 	size_t size;
 
@@ -40,7 +40,12 @@ void loop(void)
 		if (getline(&input, &size, stdin) == -1)
 		{
 			if (looped != 0)
-				free_array(args);
+			{
+				if (check_arg(firstarg, args[0]) == 0)
+					free(args);
+				else
+					free_array(args);
+			}
 			free(input);
 			_putchar('\n');
 			_exit(0);
@@ -51,6 +56,7 @@ void loop(void)
 			if (check_builtins(args) == -1)
 			{
 				inchild = 1;
+				firstarg = args[0];
 				output(args);
 			}
 			looped++;

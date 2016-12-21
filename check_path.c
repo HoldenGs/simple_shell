@@ -33,6 +33,7 @@ char **check_path(char **args)
 			return (args);
 		}
 		dir = tokenize(NULL, delim, &pos);
+		free(filename);
 	}
 	free(filename);
 	free(path);

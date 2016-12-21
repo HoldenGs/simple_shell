@@ -65,3 +65,25 @@ int wordcount(char *str)
 	}
 	return (wc);
 }
+
+
+/**
+ * check_arg - Compare the original first argument to
+ * a possible new first argument
+ *
+ * @firstarg: The original first argument
+ * @arg0: The argument that may have changed
+ *
+ * Return: 0 if they're the same, 1 if they are different
+ */
+int check_arg(char *firstarg, char *arg0)
+{
+	int len;
+
+	len = 0;
+	while (firstarg[len] != '\0')
+		len++;
+	if (_strncmp(firstarg, arg0, len) == 0)
+		return (0);
+	return (1);
+}
