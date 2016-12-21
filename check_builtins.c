@@ -17,5 +17,5 @@ int check_builtins(char **args)
 			return (builtins[i].func(args));
 		i++;
 	}
-	return (0);
+	return (-1);
 }
