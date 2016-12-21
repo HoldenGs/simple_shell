@@ -20,6 +20,8 @@ int main(int ac, char **av, char **env)
 
 /**
  * loop - shell prompt loop
+ *
+ * Return: void
  */
 void loop(void)
 {
@@ -39,13 +41,6 @@ void loop(void)
 		_puts("HoldenGs$ ");
 		if (getline(&input, &size, stdin) == -1)
 		{
-			if (looped != 0)
-			{
-				if (check_arg(firstarg, args[0]) == 0)
-					free(args);
-				else
-					free_array(args);
-			}
 			free(input);
 			_putchar('\n');
 			_exit(0);
@@ -59,6 +54,10 @@ void loop(void)
 				firstarg = args[0];
 				output(args);
 			}
+			if (check_arg(firstarg, args[0]) == 0)
+				free(args);
+			else
+				free_array(args);
 			looped++;
 		}
 	}
