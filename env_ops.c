@@ -1,39 +1,13 @@
 #include "shell.h"
 
 /**
- * hosh_printenv - print the list of environment variables
- *
- * Return: void
- */
-int hosh_printenv(char **args)
-{
-	char c;
-	int i, j;
-
-	if (args[1] == NULL)
-	{
-		for (i = 0; environ[i]; i++)
-		{
-			for (j = 0; environ[i][j]; j++)
-			{
-				c = environ[i][j];
-				_putchar(c);
-			}
-			_putchar('\n');
-		}
-		return (0);
-	}
-	return (-1);
-}
-
-/**
- * unsetenv - unset an environment variable
+ * _unsetenv - unset an environment variable
  *
  * @name: name of variable
  *
  * Return: 0 on success, -1 on failure
  */
-int hosh_unsetenv(char *name)
+int _unsetenv(char *name)
 {
 	char **ep;
 	int len;
@@ -57,7 +31,7 @@ int hosh_unsetenv(char *name)
 }
 
 /**
- * hosh_setenv - set an environment variable
+ * _setenv - set an environment variable
  *
  * @name: variable name
  * @value: variable value
@@ -65,34 +39,33 @@ int hosh_unsetenv(char *name)
  *
  * Return: 0 on success, -1 on failure
  */
-int hosh_setenv(char *name, char *value, int overwrite)
+int _setenv(char *name, char *value, int overwrite)
 {
 	char *envp, *equals;
-	/*int len;*/
 
 	equals = "=";
 	if (name == NULL || name[0] == '\0' || value == NULL)
 		return (-1);
-	if (hosh_findenv(name) != NULL && overwrite == 0)
+	if (_findenv(name) != NULL && overwrite == 0)
 		return (0);
-	hosh_unsetenv(name);
+	_unsetenv(name);
 	envp = smart_alloc(sizeof(char) * (_strlen(name) + 1));
 	envp = _strcpy(envp, name);
 	envp = str_concat(envp, equals);
 	envp = str_concat(envp, value);
-	if (hosh_addenv(envp, name) != 0)
+	if (_addenv(envp, name) != 0)
 		return (-1);
 	return (0);
 }
 
 /**
- * hosh_findenv - get the pointer to an environment variable
+ * _findenv - get the pointer to an environment variable
  *
  * @name: variable name
  *
  * Return: pointer to variable if it exists, or NULL if it doesn't
  */
-char *hosh_findenv(char *name)
+char *_findenv(char *name)
 {
 	char **envp;
 	int len;
@@ -109,19 +82,19 @@ char *hosh_findenv(char *name)
 }
 
 /**
- * hosh_addenv - add or modify an environment variable
+ * _addenv - add or modify an environment variable
  *
  * @var: variable and value
  * @name: name of variable to add or modify
  *
  * Return: 0 if success, -1 if failure
  */
-int hosh_addenv(char *newvar, char *name)
+int _addenv(char *newvar, char *name)
 {
 	char **newenv, **newhead;
 	size_t i;
 
-	if (hosh_findenv(name) == NULL)
+	if (_findenv(name) == NULL)
 	{
 		for (i = 0; environ[i] != NULL; i++);
 		newenv = smart_alloc(sizeof(char *) * (i + 2));

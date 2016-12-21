@@ -45,9 +45,7 @@ void loop(void)
 		if (getline(&input, &size, stdin) == -1)
 		{
 			if (looped != 0)
-			{
-				free(args);
-			}
+				free_array(args);
 			free(input);
 			_putchar('\n');
 			_exit(0);
@@ -57,11 +55,12 @@ void loop(void)
 			args = make_args(input);
 			if (check_builtins(args) == 0)
 				inchild = 1;
-			output(args);
+			else
+				output(args);
 			looped++;
 		}
 	}
-	free(args);
+	free_array(args);
 	free(input);
 }
 

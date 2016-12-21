@@ -3,6 +3,7 @@
 /**
  * check_path - Check the path for the given file and if found
  * replaces command argument with new full file name
+ *
  * @commands: Pointer array holding command & all command args
  *
  * Return: Pointer array to commands w/ first command replaced
@@ -15,7 +16,7 @@ char **check_path(char **args)
 
 	pos = NULL;
 	delim = ":";
-	path = hosh_copypath("PATH");
+	path = _copypath("PATH");
 	if (path == NULL)
 	{
 		_puts("You have no PATH? What are you, crazy?\n");
@@ -81,7 +82,7 @@ char *path_concat(char *s1, char *s2)
  *
  * Return: PATH value, NULL if it can't be found
  */
-char *hosh_copypath(char *name)
+char *_copypath(char *name)
 {
         char **envp, *path;
         int len, i;

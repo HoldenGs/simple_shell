@@ -5,6 +5,7 @@ int check_builtins(char **args)
 	builtins_t builtins[] = {
 		{"exit", hosh_exit},
 		{"env", hosh_printenv},
+		{"unsetenv", hosh_unsetenv},
 		{NULL, NULL}
 	};
 	int i, len;

@@ -48,18 +48,19 @@ void *smart_alloc(size_t size);
 /* --Path Functions-- */
 char **check_path(char **args);
 char *path_concat(char *s1, char *s2);
-char *hosh_copypath(char *name);
+char *_copypath(char *name);
 
 /* --Builtin Functions-- */
 int check_builtins(char **args);
+int hosh_printenv(char **args);
+int hosh_unsetenv(char **args);
 int hosh_exit(char **args);
 
 /* --Env Functions-- */
-int hosh_printenv(char **args);
-int hosh_unsetenv(char *name);
-int hosh_setenv(char *name, char *value, int overwrite);
-char *hosh_findenv(char *name);
-int hosh_addenv(char *newvar, char *name);
+int _unsetenv(char *name);
+int _setenv(char *name, char *value, int overwrite);
+char *_findenv(char *name);
+int _addenv(char *newvar, char *name);
 
 /* --Print Functions-- */
 void _puts(char *str);
