@@ -14,6 +14,7 @@ char *tokenize(char *input, const char *delim, char **saveptr)
 	char *token;
 	int i;
 
+	i = 0;
 	if (input == NULL)
 		input = *saveptr;
 	input += _strspn(input, delim);
