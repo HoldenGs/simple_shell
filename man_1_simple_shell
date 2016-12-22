@@ -17,6 +17,8 @@ Change the value of an environment variable, if no environment variable exits cr
 Remove an environment variable
 .IP help
 Displays all builtins if no argument given, otherwise displays brief description if builtin names are passed as arguments.
+.SH Exit Status
+Any failure from inside the shell will cause the shell to exit with a nonzeor status. If the shell runs and exits successfully it's exit status will be 0.
 .SH BUGS
 Not every possible input has been tested, so some inputs may cause unexpected results. Currently this program does not successfully free all memory that it allocates during runtime.
 .SH AUTHORS
