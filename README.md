@@ -16,7 +16,7 @@ Run like so:
 ```
 The shell can accept commands, which should be given like so:
 ```
-$ command args [...]
+$ command [args ...]
 ```
 
 ##Files & Contents
