@@ -30,9 +30,6 @@ void *smart_alloc(size_t size)
  */
 void free_array(char **array)
 {
-	int i;
-
-	for (i = 0; array[i] != NULL; i++)
-		free(array[i]);
+	free(array[0]);
 	free(array);
 }
