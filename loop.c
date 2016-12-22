@@ -39,30 +39,31 @@ void loop(void)
 	{
 		inchild = 0;
 		_puts("HoldenGs$ ");
-		if (getline(&input, &size, stdin) == -1)
+		if (getline(&input, &size, stdin) != -1)
+		{
+			if (input[0] != '\n' && input[0] != '#')
+			{
+				args = make_args(input);
+				if (check_builtins(args, input) == -1)
+				{
+					inchild = 1;
+					firstarg = args[0];
+					output(args);
+				}
+				if (check_arg(firstarg, args[0]) == 0)
+					free(args);
+				else
+					free_array(args);
+				looped++;
+			}
+		}
+		else
 		{
 			free(input);
 			_putchar('\n');
 			_exit(0);
 		}
-		if (input[0] != '\n' && input[0] != '#')
-		{
-			args = make_args(input);
-			if (check_builtins(args, input) == -1)
-			{
-				inchild = 1;
-				firstarg = args[0];
-				output(args);
-			}
-			if (check_arg(firstarg, args[0]) == 0)
-				free(args);
-			else
-				free_array(args);
-			looped++;
-		}
 	}
-	free_array(args);
-	free(input);
 }
 
 /**
