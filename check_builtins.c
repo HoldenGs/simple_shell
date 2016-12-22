@@ -3,6 +3,7 @@
 /**
  * check_builtins - Check to see if given command is a builtin
  * @args: Array holding command and all its arguments
+ * @input: The user input received from getline
  *
  * Return: the return value of the builtin called on success,
  * or -1 if it failed
