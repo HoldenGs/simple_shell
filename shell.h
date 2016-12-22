@@ -28,7 +28,7 @@ typedef struct addresses
 typedef struct builtins_s
 {
 	char *name;
-	int (*func)(char **);
+	int (*func)();
 } builtins_t;
 
 /* --Help Struct --*/
@@ -74,11 +74,12 @@ char *path_concat(char *s1, char *s2);
 char *_copypath(char *name);
 
 /* --Builtin Functions-- */
-int check_builtins(char **args);
+int check_builtins(char **args, char *input);
 int hosh_printenv(char **args);
 int hosh_setenv(char **args);
 int hosh_unsetenv(char **args);
-int hosh_exit(char **args);
+int hosh_exit(char **args, char *input);
+int hosh_help(char **args);
 
 /* --Env Functions-- */
 int _unsetenv(char *name);
@@ -103,7 +104,6 @@ char *_strcpy(char *dest, char *src);
 int _atoi(char *str);
 
 /* --Help Functions-- */
-int hosh_help(char **args);
 void help_exit(void);
 void help_env(void);
 void help_setenv(void);
