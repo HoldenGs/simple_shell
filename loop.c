@@ -48,7 +48,7 @@ void loop(void)
 		if (input[0] != '\n' && input[0] != '#')
 		{
 			args = make_args(input);
-			if (check_builtins(args) == -1)
+			if (check_builtins(args, input) == -1)
 			{
 				inchild = 1;
 				firstarg = args[0];

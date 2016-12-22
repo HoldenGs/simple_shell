@@ -7,7 +7,7 @@
  * Return: the return value of the builtin called on success,
  * or -1 if it failed
  */
-int check_builtins(char **args)
+int check_builtins(char **args, char *input)
 {
 	builtins_t builtins[] = {
 		{"exit", hosh_exit},
@@ -21,7 +21,11 @@ int check_builtins(char **args)
 
 	len = _strlen(args[0]);
 	for (i = 0; builtins[i].name != NULL; i++)
+	{
+		if (_strncmp(args[0], "exit", 4) == 0)
+			return (builtins[0].func(args, input));
 		if (_strncmp(args[0], builtins[i].name, len) == 0)
 			return (builtins[i].func(args));
+	}
 	return (-1);
 }
