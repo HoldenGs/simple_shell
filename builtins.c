@@ -53,6 +53,7 @@ int hosh_unsetenv(char **args)
 /**
  * hosh_exit - exit the current child process & free what must be free'd
  * @args: Double pointer to the command and given args
+ * @input: The original input from the user
  *
  * Return: 0 if success, 1 if failure
  */
