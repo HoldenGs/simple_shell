@@ -56,12 +56,13 @@ int hosh_unsetenv(char **args)
  *
  * Return: 0 if success, 1 if failure
  */
-int hosh_exit(char **args)
+int hosh_exit(char **args, char *input)
 {
 	int status;
 
 	if (args[1] == NULL)
 	{
+		free(input);
 		free(args);
 		_exit(0);
 	}
@@ -73,6 +74,7 @@ int hosh_exit(char **args)
 			_puts("Illegal number\n");
 			return (1);
 		}
+		free(input);
 		free(args);
 		_exit(status);
 	}
