@@ -38,7 +38,7 @@ void loop(void)
 	while (1)
 	{
 		inchild = 0;
-		_puts("HoldenGs$ ");
+		_puts("Hosh$ ");
 		if (getline(&input, &size, stdin) != -1)
 		{
 			if (input[0] != '\n' && input[0] != '#')
@@ -74,6 +74,6 @@ void sighandler(int sig_num)
 {
 	(void)sig_num;
 	if (inchild == 0)
-		_puts("\nHoldenGs$ ");
+		_puts("\nHosh$ ");
 	signal(SIGINT, sighandler);
 }
